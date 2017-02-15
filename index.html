@@ -1,0 +1,266 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>{$tpshop_config['shop_info_store_title']}</title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/index.css"/>
+    <script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/layer.js" ></script>
+    <script type="text/javascript" src="__STATIC__/js/TouchSlide.1.1.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/touchslider.dev.js"></script>
+    <script src="__PUBLIC__/js/global.js"></script>
+    <script src="__PUBLIC__/js/mobile_common.js"></script>
+    <script src="__STATIC__/js/bootstrap.min.js" type="text/javascript" ></script>
+</head>
+<body style="background-color:#F2F2F2;">
+<div class="top-div" >
+    <img class="top-div-logo"  src="__STATIC__/images/index-logo.png" />
+    <a href="{:U('index/changeaddress')}"><div ><img class="left-img"  src="__STATIC__/images/location.png" /> <span id="baidumap">定位中</span> <img class="right-img"  src="__STATIC__/images/down.png" /></div></a>
+</div>
+<div id="scrollimg" class="scrollimg">
+    <div class="bd">
+        <ul>
+            <adv pid ="2" limit="5" item="v">
+                <li><a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if> ><img src="{$v[ad_code]}" title="{$v[title]}"width="100%" style="{$v[style]}"/></a></li>
+            </adv>
+        </ul>
+    </div>
+    <div class="hd">
+        <ul></ul>
+    </div>
+</div>
+<script type="text/javascript">
+    TouchSlide({
+        slideCell:"#scrollimg",
+        titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+        mainCell:".bd ul",
+        effect:"leftLoop",
+        autoPage:true,//自动分页
+        autoPlay:true //自动播放
+    });
+</script>
+<div class="top-content-div container" >
+    <img class="kjds-img"  src="__STATIC__/images/sendwater.png" />
+    <span class="kjds-span" >快捷定水</span>
+    <div id="water" class="top-content-div-water" >
+        <if condition="$type eq 1">
+            <form method="post" id='form1'>
+                <a href="{:U('Mobile/Goods/goodsInfo',array('id'=>$good[goods_id]))}">
+                    <img class="top-content-div-water-img"  src="{$good.goods_id|goods_thum_images=200,200}" />
+                    <span class="top-content-div-water-name" >{$good.goods_name}</span>
+                    <span class="top-content-div-water-money" >价格：<font style="color:#D01D74;">￥{$good.goods_price}元</font></span>
+                </a>
+                <div class="top-content-div-water-choosenum" >
+                    <div style="float:right;">
+                                <span onclick="numCalcSub(1);" class="subBadge" class="badge" >
+                                    <svg class="icon" aria-hidden="true"><use xlink:href="#icon-jian"></use></svg>
+                                </span>
+                        <span id="num1" style="font-size:16px;">1</span>
+                                <span onclick="numCalcAdd(1);" class="addBadge" class="badge" >
+                                    <svg class="icon" aria-hidden="true"><use xlink:href="#icon-jia"></use></svg>
+                                </span>
+                    </div>
+                    <br><span id="goto" onclick="toPay(1);">去结算</span>
+                </div>
+                <input type="hidden" name="goods_id" value="{$good[goods_id]}" />
+            </form>
+            <else/>
+            <div class="no_order">
+                <span style="width: 100%;font-size: 14px;">您没有历史订购记录</span></br>
+                <span class="go_shop" onclick="javascript:window.location.href='{:U('index/watershop')}'">前往水商城</span>
+            </div>
+
+        </if>
+    </div>
+</div>
+
+<div class="middle-content-div container" >
+    <img class="yhhd-img" src="__STATIC__/images/yhhd.png" />
+    <span class="yhhd-span" >优惠活动</span><a href="{:U('Activity/group_list')}" style="float:right;color:black;font-size:14px;">更多
+    <svg class="icon" aria-hidden="true"><use xlink:href="#icon-gengduo"></use></svg></a>
+    <div class="floor_images">
+        <dl>
+            <dt>
+                <adv  limit="1" item="v" pid="310">
+                    <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if> >
+                    <img src="{$v[ad_code]}" title="{$v[title]}" style="{$v[style]}" border="0">
+                    </a>
+                </adv>
+            </dt>
+            <dd>
+        <span class="Edge">
+          <adv  limit="1" item="v" pid="311">
+              <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if> >
+              <img src="{$v[ad_code]}" title="{$v[title]}" style="{$v[style]}" border="0">
+              </a>
+          </adv>
+        </span>
+        <span>
+          <adv  limit="1" item="v" pid="312">
+              <a href="{$v.ad_link}" <if condition="$v['target'] eq 1">target="_blank"</if> >
+              <img src="{$v[ad_code]}" title="{$v[title]}" style="{$v[style]}" border="0">
+              </a>
+          </adv>
+        </span></dd>
+        </dl>
+    </div>
+</div>
+
+<div class="bottom-content-div container" >
+    <img class="jkpp-img" src="__STATIC__/images/jkpp.png" />
+    <span class="jkpp-span" >健康品牌</span>
+    <!--广告开始-->
+    <adv pid ="3" limit="1" item="v" key="k">
+        <div><img src="{$v[ad_code]}" title="{$v[title]}"width="100%" style="{$v[style]}" /></div>
+    </adv>
+    <dt style="margin-top:10px;"></dt>
+    <adv pid ="4" limit="1" item="v" key="k">
+        <div><img src="{$v[ad_code]}" title="{$v[title]}"width="100%" style="{$v[style]}" /></div>
+    </adv>
+    <dt style="margin-top:10px;"></dt>
+    <adv pid ="5" limit="1" item="v" key="k">
+        <div><img src="{$v[ad_code]}" title="{$v[title]}"width="100%" style="{$v[style]}" /></div>
+    </adv>
+    <dt style="margin-top:10px;"></dt>
+    <adv pid ="6" limit="1" item="v" key="k">
+        <div><img src="{$v[ad_code]}" title="{$v[title]}"width="100%" style="{$v[style]}" /></div>
+    </adv>
+    <dt style="margin-top:10px;"></dt>
+    <adv pid ="7" limit="1" item="v" key="k">
+        <div><img src="{$v[ad_code]}" title="{$v[title]}"width="100%" style="{$v[style]}" /></div>
+    </adv>
+    <!--广告结束-->
+</div>
+
+<div style="margin-bottom:60px;"></div>
+<include file="Public/footer_nav"/>
+<script src="//at.alicdn.com/t/font_0umkgpqmkvl07ldi.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=bbBAAD6xBLXTbz1PSDSQpYGThnlHkjHd"></script>
+<script type="text/javascript">
+    window.onload= getLocation();
+    function getLocation(){
+        var mapshop = window.sessionStorage.getItem('shop') || false;
+        var mapgps = window.sessionStorage.getItem('gps') || false;
+        if(mapshop != false){
+            var mapshop = JSON.parse(mapshop);
+            var mapgps = JSON.parse(mapgps);
+            $('#baidumap').html(mapgps.city+mapgps.street);
+            return false;
+        }
+
+        var geolocation = new BMap.Geolocation();
+        var geoc        = new BMap.Geocoder();
+        geolocation.getCurrentPosition( function(r) {
+            if(this.getStatus() == BMAP_STATUS_SUCCESS)
+            {
+                var pt = r.point;
+
+                geoc.getLocation(pt, function(rs){
+
+                    var addComp         = rs.addressComponents;
+
+                    var gpsinfo         = {};
+                    gpsinfo.province    = addComp.province;
+                    gpsinfo.city        = addComp.city;
+                    gpsinfo.district    = addComp.district;
+                    gpsinfo.street      = addComp.street;
+                    gpsinfo.streetNumber= addComp.streetNumber;
+                    gpsinfo.lng         = rs.point.lng;
+                    gpsinfo.lat         = rs.point.lat;
+                    mapfindshop( rs.point.lng, rs.point.lat );
+
+                });
+
+            }else {
+                switch( this.getStatus() )
+                {
+                    case 2:
+                        alert( '位置结果未知 获取位置失败.' );
+                        break;
+                    case 3:
+                        alert( '导航结果未知 获取位置失败..' );
+                        break;
+                    case 4:
+                        alert( '非法密钥 获取位置失败.' );
+                        break;
+                    case 5:
+                        alert( '对不起,非法请求位置  获取位置失败.' );
+                        break;
+                    case 6:
+                        alert( '对不起,当前 没有权限 获取位置失败.' );
+                        break;
+                    case 7:
+                        alert( '对不起,服务不可用 获取位置失败.' );
+                        break;
+                    case 8:
+                        alert( '对不起,请求超时 获取位置失败.' );
+                        break;
+                }
+            }
+        },{enableHighAccuracy: true});
+    }
+    function mapfindshop(lng,lat){
+        var loading = layer.open({type: 2});
+        $.get('{:U('Shopdo/findshopbyxy')}',{datay:lng, datax:lat},function(e){
+            layer.close(loading);
+            if(e.status==1){
+                window.sessionStorage.setItem('shop', JSON.stringify(e.data));
+                window.sessionStorage.setItem('gps', JSON.stringify(e.gps));
+                window.sessionStorage.setItem('region', JSON.stringify(e.region));
+                $('#baidumap').html(e.gps.city+e.gps.street);
+            }
+
+        });
+    }
+
+    function top_lab(e) {
+        $(".top-content-div .row a").css('background-color', '#6C9BD2');
+        $("#top_lab" + e).css('background-color', '#D01D74');
+
+        $(".top-content-div-water").css('display', 'none');
+        $("#water" + e).css('display', 'block');
+    }
+    function numCalcSub(e) {
+        numInt = parseInt($("#num" + e).text());
+        if (numInt > 1) {
+            numInt--;
+        }
+        $("#num" + e).text(numInt);
+    }
+    function numCalcAdd(e) {
+        numInt = parseInt($("#num" + e).text());
+        if (numInt < 99) {
+            numInt++;
+        }
+        $("#num" + e).text(numInt);
+    }
+
+    function toPay(e) { //去结算，先加入购物车再跳转到购物车结算
+        var data = $('#form'+e).serialize();
+        data += "&goods_num=" + $("#num" + e).text();
+        console.log(data);
+        $.ajax({
+            type: "POST",
+            url: "/index.php?m=Home&c=Cart&a=ajaxAddCart_index",
+            data: data , // 你的formid 搜索表单 序列化提交
+            dataType: 'json',
+            success: function(data) {
+                // 加入购物车后再跳转到 购物车页面
+                if (data.status < 0)
+                {
+                    layer.open({content: data.msg, time: 2});
+                    return false;
+                }
+                console.log(data);
+                location.href = "/index.php?m=Mobile&c=Cart&a=cart2";
+                return;
+            }
+        });
+    }
+</script>
+</body>
+</html>
